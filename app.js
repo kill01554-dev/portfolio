@@ -141,4 +141,114 @@ projectDots.forEach((dot) => {
    START
 ========================================= */
 
-showProject(0);
+javascript
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================
+     3D FAMILY CAROUSEL
+  ========================= */
+
+  const carousel = document.querySelector(".carousel");
+  const familyNext = document.querySelector(".family-next");
+  const familyPrev = document.querySelector(".family-prev");
+
+  let familyRotation = 0;
+  const familyStep = 40;
+
+  function rotateFamily(direction) {
+    if (!carousel) return;
+
+    familyRotation += direction * familyStep;
+    carousel.style.transform = `rotateY(${familyRotation}deg)`;
+  }
+
+  familyNext?.addEventListener("click", () => rotateFamily(-1));
+  familyPrev?.addEventListener("click", () => rotateFamily(1));
+
+  /* =========================
+     PROJECT SLIDER
+  ========================= */
+
+  const projectTrack = document.querySelector(".project-track");
+  const projectSlides = document.querySelectorAll(".project-slide");
+  const projectNext = document.querySelector(".project-next");
+  const projectPrev = document.querySelector(".project-prev");
+  const projectDots = document.querySelectorAll(".project-dot");
+
+  let currentProject = 0;
+  let autoSlide = null;
+
+  function showProject(index) {
+    if (!projectTrack || projectSlides.length === 0) return;
+
+    currentProject =
+      (index + projectSlides.length) % projectSlides.length;
+
+    projectTrack.style.transform =
+      `translateX(-${currentProject * 100}%)`;
+
+    projectDots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentProject);
+      dot.setAttribute("aria-current",
+        i === currentProject ? "true" : "false");
+    });
+  }
+
+  function startAutoSlide() {
+    clearInterval(autoSlide);
+
+    if (projectSlides.length > 1) {
+      autoSlide = setInterval(() => {
+        showProject(currentProject + 1);
+      }, 5000);
+    }
+  }
+
+  projectNext?.addEventListener("click", () => {
+    showProject(currentProject + 1);
+    startAutoSlide();
+  });
+
+  projectPrev?.addEventListener("click", () => {
+    showProject(currentProject - 1);
+    startAutoSlide();
+  });
+
+  projectDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showProject(index);
+      startAutoSlide();
+    });
+  });
+
+  /* Klaviatura */
+
+  document.addEventListener("keydown", (event) => {
+    const tag = document.activeElement?.tagName;
+
+    if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+    if (event.key === "ArrowRight") {
+      rotateFamily(-1);
+    }
+
+    if (event.key === "ArrowLeft") {
+      rotateFamily(1);
+    }
+
+    if (event.key.toLowerCase() === "d") {
+      showProject(currentProject + 1);
+      startAutoSlide();
+    }
+
+    if (event.key.toLowerCase() === "a") {
+      showProject(currentProject - 1);
+      startAutoSlide();
+    }
+  });
+
+  /* Dastlabki holat */
+  showProject(0);
+  startAutoSlide();
+
+});
