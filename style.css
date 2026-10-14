@@ -1192,21 +1192,20 @@ footer {
   }
 }
 
-.mau{
+.mau {
   width: 300px;
   margin-left: 800px;
   border-radius: 50px;
+  bottom: 70px;
 }
 
-
-.may{
+.may {
   width: 300px;
   height: 400px;
-   margin-left: 800px;
-   object-fit: none;
-     border-radius: 50px;
+  margin-left: 800px;
+  object-fit: none;
+  border-radius: 50px;
 }
-
 
 .next {
   right: 40px;
@@ -1293,8 +1292,6 @@ footer {
   color: #94a3b8;
 }
 
-
-
 .about-title {
   font-size: 7.5rem;
   font-weight: 900;
@@ -1317,9 +1314,18 @@ footer {
   color: transparent;
 }
 
+.mho {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin-left: 750px;
+  letter-spacing: 5px;
+  font-size: 25px;
+  font-weight: 900;
+  border-radius: 50px;
+  bottom: 50px;
+}
 
-
-
-
-
-
+.huu {
+  top: 50px;
+}
