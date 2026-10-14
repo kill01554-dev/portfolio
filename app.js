@@ -252,3 +252,42 @@ document.addEventListener("DOMContentLoaded", () => {
   startAutoSlide();
 
 });
+
+
+
+
+
+/* FON UCHUN ZARRALAR */
+const particles = document.getElementById("particles");
+
+for (let i = 0; i < 55; i++) {
+  const dot = document.createElement("span");
+
+  dot.className = "particle";
+  dot.style.left = Math.random() * 100 + "%";
+  dot.style.top = Math.random() * 100 + "%";
+
+  dot.style.setProperty(
+    "--speed",
+    3 + Math.random() * 7 + "s"
+  );
+
+  dot.style.animationDelay =
+    -Math.random() * 8 + "s";
+
+  particles.appendChild(dot);
+}
+
+/* MOBIL MENYU */
+const menuBtn = document.getElementById("menuBtn");
+const nav = document.querySelector(".navbar nav");
+
+menuBtn.addEventListener("click", () => {
+  nav.classList.toggle("open");
+});
+
+nav.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    nav.classList.remove("open");
+  });
+});
